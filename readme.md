@@ -2,24 +2,27 @@
 
 # ytdlp-nodejs
 
-This Node.js module is a wrapper for [`yt-dlp`](https://github.com/yt-dlp/yt-dlp), a powerful video downloader, that allows you to download, stream, and fetch metadata for videos from various websites. The wrapper automatically downloads the `yt-dlp` binary and provides a simple interface for using its features directly within a Node.js environment.
+This Node.js module is a wrapper for [`yt-dlp`](https://github.com/yt-dlp/yt-dlp), a powerful video downloader, that allows you to download, stream, and fetch metadata for videos from various websites. The wrapper uses system-installed `yt-dlp` and `ffmpeg` binaries and provides a simple interface for using their features directly within a Node.js environment.
 
 ## Installation
 
 To install the `yt-dlp` Node.js wrapper, run:
 
 ```bash
-npm i ytdlp-nodejs
+npm i @abdullah2993/ytdlp-nodejs
 ```
 
-This package recommends installing FFmpeg. You can manually download it from [here](https://github.com/yt-dlp/FFmpeg-Builds#ffmpeg-static-auto-builds), or you can use the [downloadFFmpeg()](#downloadffmpeg-promisevoid) function to automate the process. Also you can use cli to download.
+This package requires `yt-dlp` and optionally `ffmpeg` to be installed system-wide. Please install them using your system's package manager:
+
+- **yt-dlp**: `pip install yt-dlp` or via your system package manager
+- **ffmpeg**: `brew install ffmpeg` (macOS), `apt install ffmpeg` (Linux), or via your system package manager
 
 ## Usage
 
 ### Importing the Package
 
 ```javascript
-import { YtDlp } from 'ytdlp-nodejs';
+import { YtDlp } from '@abdullah2993/ytdlp-nodejs';
 
 const ytdlp = new YtDlp();
 ```
@@ -375,20 +378,6 @@ const file = await ytdlp.getFileAsync(
     },
   }
 );
-```
-
-### `downloadFFmpeg(): Promise<void>`
-
-Downloads `ffmpeg` using a predefined method.
-
-#### Returns:
-
-- `Promise<void>`: Resolves once the download is complete.
-
-#### Example:
-
-```typescript
-await ytDlp.downloadFFmpeg();
 ```
 
 # Format Options

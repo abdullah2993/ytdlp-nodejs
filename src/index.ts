@@ -1,6 +1,4 @@
 import { spawn, spawnSync } from 'child_process';
-import * as fs from 'fs';
-import * as path from 'path';
 import { Blob } from 'buffer';
 import {
   ArgsOptions,
@@ -29,11 +27,6 @@ import {
 } from './utils/format';
 import { PROGRESS_STRING, stringToProgress } from './utils/progress';
 import { PassThrough } from 'stream';
-import { downloadFFmpeg, findFFmpegBinary } from './utils/ffmpeg';
-import { downloadFile } from './utils/request';
-import { downloadYtDlp, findYtdlpBinary } from './utils/ytdlp';
-
-export const BIN_DIR = path.join(__dirname, '..', 'bin');
 
 export class YtDlp {
   private readonly binaryPath: string;
@@ -41,37 +34,8 @@ export class YtDlp {
 
   // done
   constructor(opt?: YtDlpOptions) {
-    this.binaryPath = opt?.binaryPath || findYtdlpBinary() || '';
-    this.ffmpegPath = opt?.ffmpegPath || findFFmpegBinary();
-
-    if (!this.binaryPath || !fs.existsSync(this.binaryPath)) {
-      console.error(
-        new Error(
-          'yt-dlp binary not found. Please install yt-dlp or specify correct binaryPath in options.'
-        )
-      );
-    }
-
-    if (this.ffmpegPath && !fs.existsSync(this.ffmpegPath)) {
-      console.error(
-        new Error(
-          `FFmpeg binary not found at: ${this.ffmpegPath}. Please install FFmpeg or specify correct ffmpegPath.`
-        )
-      );
-    }
-
-    if (process.platform !== 'win32') {
-      try {
-        fs.chmodSync(this.binaryPath, 0o755);
-      } catch (error) {
-        console.error(
-          new Error(
-            `Failed to set executable permissions: ${error instanceof Error ? error.message : 'Unknown error'
-            }`
-          )
-        );
-      }
-    }
+    this.binaryPath = opt?.binaryPath || 'yt-dlp' 
+    this.ffmpegPath = opt?.ffmpegPath || 'ffmpeg';
   }
 
   // done
@@ -355,10 +319,6 @@ export class YtDlp {
     return execResult;
   }
 
-  public async downloadFFmpeg() {
-    return downloadFFmpeg();
-  }
-
   public async getFileAsync<F extends FormatKeyWord>(
     url: string,
     options?: GetFileOptions<F> & {
@@ -418,8 +378,6 @@ export class YtDlp {
 }
 
 export const helpers = {
-  downloadFFmpeg,
-  findFFmpegBinary,
   PROGRESS_STRING,
   getContentType,
   getFileExtension,
@@ -427,10 +385,6 @@ export const helpers = {
   stringToProgress,
   createArgs,
   extractThumbnails,
-  downloadFile,
-  BIN_DIR,
-  downloadYtDlp,
-  findYtdlpBinary,
 };
 
 export type {

@@ -1,13 +1,10 @@
 {
-  "name": "ytdlp-nodejs",
-  "version": "2.3.5",
+  "name": "@abdullah2993/ytdlp-nodejs",
+  "version": "0.0.1",
   "description": "A TypeScript wrapper for the yt-dlp executable",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "ytdlp-nodejs": "./dist/cli.js"
-  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -21,10 +18,6 @@
     "test": "jest",
     "lint": "eslint",
     "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
-    "download:ytdlp": "tsx ./src/scripts/downloadYtdlp.ts",
-    "download:ffmpeg": "tsx ./src/scripts/downloadFFmpeg.ts",
-    "postdownload": "node ./dist/scripts/downloadYtdlp.js",
-    "postinstall": "node -e \"process.env.INIT_CWD !== process.cwd() && require('child_process').execSync('npm run postdownload', { stdio: 'inherit' });\"",
     "prepare": "husky"
   },
   "keywords": [
@@ -48,10 +41,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iqbal-rashed/ytdlp-nodejs.git"
+    "url": "https://github.com/abdullah2993/ytdlp-nodejs"
   },
   "bugs": {
-    "url": "https://github.com/iqbal-rashed/ytdlp-nodejs/issues"
+    "url": "https://github.com/abdullah2993/ytdlp-nodejs/issues"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
