@@ -1,6 +1,6 @@
 {
   "name": "@abdullah2993/ytdlp-nodejs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A TypeScript wrapper for the yt-dlp executable",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
